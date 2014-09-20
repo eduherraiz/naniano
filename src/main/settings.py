@@ -35,7 +35,6 @@ class Base(CachesMixin, DatabasesMixin, PathsMixin, LogsMixin, SecurityMixin,
         'django_extensions',
         'modeltranslation',
         'django_comments',
-        'tinymce',
         'zinnia_bootstrap',
         'apconf',
         'south',
@@ -45,6 +44,10 @@ class Base(CachesMixin, DatabasesMixin, PathsMixin, LogsMixin, SecurityMixin,
         "tagging",
         "mptt",
         "zinnia",
+        # 'zinnia_wymeditor',
+        'tinymce',
+        # 'ckeditor',
+        'django_extensions',
     )
 
     MIDDLEWARE_CLASSES = (
@@ -121,3 +124,6 @@ class Base(CachesMixin, DatabasesMixin, PathsMixin, LogsMixin, SecurityMixin,
     }
     TINYMCE_SPELLCHECKER = True
     TINYMCE_COMPRESSOR = True
+
+    CKEDITOR_UPLOAD_PATH = "uploads/"
+    CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
