@@ -1,3 +1,10 @@
+## APP BASED IGNORES STARTS HERE
+src/db.sqlite
+app.ini
+src/apconf/.hg*
+
+## END APP BASED IGNORES STARTS HERE
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -52,3 +59,6 @@ docs/_build/
 
 # PyBuilder
 target/
+
+#Pycharm
+.idea

@@ -1,0 +1,7 @@
+Crear entorno virtual
+Instalar requerimientos del archivo requirements.txt
+Configurar un app.ini a partir del src/app.ini.template
+python src/manage.py syncdb
+python src/manage.py migrate
+python src/manage.py collectstatic
+python src/manage.py runserver
