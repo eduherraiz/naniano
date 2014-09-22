@@ -13,12 +13,7 @@ urlpatterns = patterns('',
     url(r'^admin_tools/', include('admin_tools.urls')),
     url(r'^', include('zinnia.urls', namespace='zinnia')),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^admin_tools/', include('admin_tools.urls')),
-    # url(r'^tinymce/', include('tinymce.urls')),
-    url(r'^ckeditor/', include('ckeditor.urls')),
-
-
-    # url(r'^comments/', include('django.contrib.comments.urls')),
+    url(r'^comments/', include('django.contrib.comments.urls')),
 )
 
 

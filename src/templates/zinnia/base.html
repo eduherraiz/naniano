@@ -2,6 +2,17 @@
 {% load zinnia_tags i18n %}
 
 {% block sidebar %}
+<aside id="widget-recents" class="widget panel panel-default">
+  <div class="panel-heading">
+    {% trans "Recent entries" %}
+  </div>
+  {% get_recent_entries %}
+</aside>
+<aside id="widget-randoms" class="widget panel panel-default">
+  <div class="panel-heading">
+    {% trans "Random entries" %}
+  </div>
+  {% get_random_entries %}
 </aside>
 {% if user.is_authenticated %}
 <aside id="widget-tools" class="widget panel panel-danger">
@@ -37,3 +48,5 @@
 </aside>
 {% endif %}
 {% endblock sidebar %}
+
+

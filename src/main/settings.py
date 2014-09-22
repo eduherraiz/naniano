@@ -69,6 +69,7 @@ class Base(CachesMixin, DatabasesMixin, PathsMixin, LogsMixin, SecurityMixin,
         'django.core.context_processors.tz',
         'django.contrib.messages.context_processors.messages',
         'zinnia.context_processors.version',  # Optional
+        'main.context_processors.naniano',  # Optional
     )
 
     TEMPLATE_LOADERS = (
@@ -127,3 +128,11 @@ class Base(CachesMixin, DatabasesMixin, PathsMixin, LogsMixin, SecurityMixin,
 
     CKEDITOR_UPLOAD_PATH = "uploads/"
     CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
+
+
+    ## NANIANO_CONFIGS
+    NANIANO_VERSION = "0.1"
+    NANIANO_NAME = "Naniano"
+    NANIANO_LOGO = "/static"
+    NANIANO_MESSAGE_FOOTER = "Naniano v%s" % NANIANO_VERSION
+    NANIANO_LINK_FOOTER = "https://github.com/eduherraiz/naniano"
