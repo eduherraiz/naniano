@@ -3,7 +3,7 @@
 <html lang="{{ LANGUAGE_CODE }}">
   <head>
     <meta charset="utf-8">
-    <title>{{naniano_name}} - {% block title %}{% endblock title %}{% block title-page %}{% endblock title-page %}</title>
+    <title>{{config.NAME}} - {% block title %}{% endblock title %}{% block title-page %}{% endblock title-page %}</title>
     <meta name="robots" content="follow, all" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="{% block meta-description %}{% trans "Just another Zinnia weblog." %}{% endblock meta-description %}{% block meta-description-page %}{% endblock meta-description-page %}" />
@@ -49,7 +49,7 @@
           </button>
           <img src="{% static "zinnia_bootstrap/img/zinnia.png" %}" class="pull-left" alt="Zinnia's Weblog" />
           <a href="{% url 'zinnia:entry_archive_index' %}" title="Zinnia's Welog" class="navbar-brand" rel="home">
-            {{naniano_name}}
+            {{config.NAME}}
           </a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
@@ -98,7 +98,7 @@
       </div>
     </div>
     <footer class="container">
-      <p><a href="{{naniano_link_footer}}">{{naniano_footer}}</a></p>
+      <p><a href="{{config.LINK_FOOTER}}">{{config.MESSAGE_FOOTER}}</a></p>
     </footer>
     <script type="text/javascript" src="{% static "zinnia_bootstrap/assets/js/jquery.js" %}"></script>
     <script type="text/javascript" src="{% static "zinnia_bootstrap/bootstrap/js/bootstrap.min.js" %}"></script>

@@ -19,6 +19,8 @@ class Base(CachesMixin, DatabasesMixin, PathsMixin, LogsMixin, SecurityMixin,
     # Configuraciones imprescindibles
     BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
+    NANIANO_VERSION = '0.1'
+
     INSTALLED_APPS = (
         'admin_tools',
         'admin_tools.theming',
@@ -48,6 +50,8 @@ class Base(CachesMixin, DatabasesMixin, PathsMixin, LogsMixin, SecurityMixin,
         'tinymce',
         # 'ckeditor',
         'django_extensions',
+        'constance',
+        'constance.backends.database',
     )
 
     MIDDLEWARE_CLASSES = (
@@ -62,14 +66,15 @@ class Base(CachesMixin, DatabasesMixin, PathsMixin, LogsMixin, SecurityMixin,
     TEMPLATE_CONTEXT_PROCESSORS = (
         'django.contrib.auth.context_processors.auth',
         'django.core.context_processors.i18n',
-        'django.core.context_processors.request',
         'django.core.context_processors.media',
         'django.core.context_processors.static',
         'django.core.context_processors.debug',
         'django.core.context_processors.tz',
         'django.contrib.messages.context_processors.messages',
         'zinnia.context_processors.version',  # Optional
-        'main.context_processors.naniano',  # Optional
+        'constance.context_processors.config',
+        'django.core.context_processors.request',
+
     )
 
     TEMPLATE_LOADERS = (
@@ -130,9 +135,20 @@ class Base(CachesMixin, DatabasesMixin, PathsMixin, LogsMixin, SecurityMixin,
     CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
 
 
-    ## NANIANO_CONFIGS
-    NANIANO_VERSION = "0.1"
-    NANIANO_NAME = "Naniano"
-    NANIANO_LOGO = "/static"
-    NANIANO_MESSAGE_FOOTER = "Naniano v%s" % NANIANO_VERSION
-    NANIANO_LINK_FOOTER = "https://github.com/eduherraiz/naniano"
+    # CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
+    # CONSTANCE_PREFIX = 'constance:naniano:'
+    # CONSTANCE_DATABASE_PREFIX = 'constance:naniano:'
+    CONSTANCE_CONNECTION = {
+        'host': 'localhost',
+        'port': 6379,
+        'db': 0,
+    }
+
+    CONSTANCE_CONFIG = {
+        'NAME' : ("Naniano", u"Nombre del proyecto"),
+        'LOGO' : ( "/static", u"Ruta de static donde encontrar el logo, blanco coge el logo por defecto."),
+        'MESSAGE_FOOTER' : ("Naniano v%s" % NANIANO_VERSION , u"Mensaje del pie de página"),
+        'LINK_FOOTER' : ("https://github.com/eduherraiz/naniano", u"Link del footer"),
+    }
+
+    CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
