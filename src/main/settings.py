@@ -52,6 +52,7 @@ class Base(CachesMixin, DatabasesMixin, PathsMixin, LogsMixin, SecurityMixin,
         'django_extensions',
         'constance',
         'constance.backends.database',
+        'contribute',
     )
 
     MIDDLEWARE_CLASSES = (

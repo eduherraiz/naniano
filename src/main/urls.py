@@ -6,7 +6,7 @@ from django.conf.urls import patterns, include, url
 from django.conf import settings
 from django.contrib import admin
 from django.conf.urls.i18n import i18n_patterns
-
+from contribute.urls  import urlpatterns as urlpatternscontribute
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -21,6 +21,7 @@ urlpatterns += i18n_patterns(
     '',
 )
 
+urlpatterns += urlpatternscontribute
 
 if settings.DEBUG:
     # Contenido estático

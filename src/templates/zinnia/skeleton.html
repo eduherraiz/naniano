@@ -36,6 +36,8 @@
     <link rel="apple-touch-icon-precomposed" href="{% static "zinnia_bootstrap/assets/ico/apple-touch-icon-57-precomposed.png" %}" />
     {% block link %}{% endblock link %}
     {% block script %}{% endblock script %}
+
+
   </head>
   <body class="zinnia {% block body-class %}{% endblock body-class %}">
     <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
@@ -60,7 +62,12 @@
             <button type="submit" name="submit" class="btn btn-default btn-sm">
               <span class="glyphicon glyphicon-search"></span>
             </button>
+
+            <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#myModal">
+              Envía un vídeo
+            </button>
           </form>
+
           <ul class="nav navbar-nav navbar-right">
             {% url 'zinnia:sitemap' as sitemap_url %}
             <li {% if sitemap in request.path %}class="active"{% endif %}>
@@ -95,12 +102,50 @@
           {% endblock sidebar %}
         </div>
         </div>
+        <!-- Button trigger modal -->
       </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="myModalLabel">Comparte un video</h4>
+          </div>
+          <div class="modal-body">
+            <form role="form">
+              <div class="form-group">
+                <label for="title">Título</label>
+                <input type="text" class="form-control" id="title" placeholder="Título">
+              </div>
+              <div class="form-group">
+                <label for="urlyoutube">Url de youtube</label>
+                <input type="url" class="form-control" id="urlyoutube" placeholder="https://www.youtube.com/watch?v=G2V6WCOmuJI">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" disabled="disabled">Enviar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     </div>
     <footer class="container">
       <p><a href="{{config.LINK_FOOTER}}">{{config.MESSAGE_FOOTER}}</a></p>
     </footer>
     <script type="text/javascript" src="{% static "zinnia_bootstrap/assets/js/jquery.js" %}"></script>
     <script type="text/javascript" src="{% static "zinnia_bootstrap/bootstrap/js/bootstrap.min.js" %}"></script>
+
+        <script type="text/javascript">
+        $(document).ready(function(){
+            $("#urlyoutube").keyup(function(){
+                alert($('input[id=urlyoutube]').val());
+            });
+        });
+    </script>
+
   </body>
 </html>
