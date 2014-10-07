@@ -114,19 +114,23 @@
             <h4 class="modal-title" id="myModalLabel">Comparte un video</h4>
           </div>
           <div class="modal-body">
-            <form role="form">
+            <form role="form" action="/contribute/" method="POST">
+              {% csrf_token %}
               <div class="form-group">
-                <label for="title">Título</label>
-                <input type="text" class="form-control" id="title" placeholder="Título">
+                <label for="titleyoutube">Título</label>
+                <input type="text" class="form-control" id="titleyoutube" placeholder="Título">
               </div>
               <div class="form-group">
                 <label for="urlyoutube">Url de youtube</label>
                 <input type="url" class="form-control" id="urlyoutube" placeholder="https://www.youtube.com/watch?v=G2V6WCOmuJI">
+                <input type="text" id="idyoutube">
               </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary" disabled="disabled" id="enviaryoutube">Enviar</button>
+            </div>
             </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" disabled="disabled">Enviar</button>
+              <div id="youtubeiframe">
+              </div>
           </div>
         </div>
       </div>
@@ -141,9 +145,58 @@
 
         <script type="text/javascript">
         $(document).ready(function(){
-            $("#urlyoutube").keyup(function(){
-                alert($('input[id=urlyoutube]').val());
+
+            function checkEnableSend(){
+                if (enable_title && enable_youtube){
+                    $('#enviaryoutube').prop('disabled', false);
+                }else{
+                    $('#enviaryoutube').prop('disabled', true);
+                }
+            }
+
+            function ytVidId(url) {
+              var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+              return (url.match(p)) ? RegExp.$1 : false;
+            }
+
+            youtubeid = false;
+            youtubeid_loaded = false;
+
+            enable_title = false;
+            enable_youtube = false;
+
+
+              $("#titleyoutube").bind({
+                'paste keyup click' : function(){
+                    titleyoutube = $('input[id=titleyoutube]').val();
+                    if (titleyoutube.length > 5) {
+                        enable_title = true;
+                    }
+                    checkEnableSend();
+                }
             });
+
+            $("#urlyoutube").bind({
+                'paste keyup click' : function(){
+                    youtubeid =  ytVidId( $('input[id=urlyoutube]').val());
+                    if (youtubeid) {
+                        youtubehtml = "<div class='embed-responsive embed-responsive-16by9'><iframe width='100%' height='300px' class='embed-responsive-item' src='//www.youtube.com/embed/" + youtubeid + "' frameborder='0' allowfullscreen></iframe></div>";
+                        youtubeid_new = youtubeid;
+                        if (youtubeid_new != youtubeid_loaded){
+                            $('#youtubeiframe').html(youtubehtml);
+                            youtubeid_loaded = youtubeid_new;
+                            $('#idyoutube').val(youtubeid_loaded);
+                            enable_youtube = true;
+                        }
+                    }else{
+                        youtubehtml = "";
+                        $('#youtubeiframe').html(youtubehtml);
+                        youtubeid_loaded = false;
+                    }
+                    checkEnableSend();
+                }
+            });
+
         });
     </script>
 

@@ -51,9 +51,15 @@ class QuickEntry(View):
         and redirect to the admin in case of error or
         to the entry's page in case of success.
         """
+        idyoutube = request.POST.get('idyoutube')
+        if idyoutube:
+            html_text = "<iframe width='100%' height='300px' class='embed-responsive-item' src='//www.youtube.com/embed/" + idyoutube + "' frameborder='0' allowfullscreen></iframe>"
+        else:
+            html_text = ""
+            
         data = {
-            'title': request.POST.get('title'),
-            'slug': slugify(request.POST.get('title')),
+            'title': request.POST.get('titleyoutube'),
+            'slug': slugify(request.POST.get('titleyoutube')),
             'status': DRAFT,
             'sites': [Site.objects.get_current().pk],
             'authors': [1],
@@ -61,7 +67,7 @@ class QuickEntry(View):
             'detail_template': 'entry_detail.html',
             'creation_date': timezone.now(),
             'last_update': timezone.now(),
-            'content': request.POST.get('content'),
+            'content': html_text,
             }
         form = QuickEntryForm(data)
         if form.is_valid():
