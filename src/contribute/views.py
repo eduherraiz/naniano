@@ -75,10 +75,8 @@ class QuickEntry(View):
             entry = form.save()
             return redirect(entry)
 
-        data = {'title': smart_str(request.POST.get('title', '')),
-                'content': smart_str(self.htmlize(
-                    request.POST.get('content', ''))),
-                # 'tags': smart_str(request.POST.get('tags', '')),
+        data = {'title': smart_str(request.POST.get('titleyoutube', '')),
+                'content': smart_str(self.htmlize(html_text)),
                 'slug': slugify(request.POST.get('title', '')),
                 'authors': request.user.pk,
                 'sites': Site.objects.get_current().pk}

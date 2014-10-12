@@ -115,17 +115,18 @@
           </div>
           <div class="modal-body">
             <form role="form" action="/contribute/" method="POST">
-              {% csrf_token %}
+                {% csrf_token %}
               <div class="form-group">
                 <label for="titleyoutube">Título</label>
-                <input type="text" class="form-control" id="titleyoutube" placeholder="Título">
+                <input type="text" class="form-control" id="titleyoutube" name="titleyoutube" placeholder="Título" />
               </div>
               <div class="form-group">
                 <label for="urlyoutube">Url de youtube</label>
-                <input type="url" class="form-control" id="urlyoutube" placeholder="https://www.youtube.com/watch?v=G2V6WCOmuJI">
-                <input type="text" id="idyoutube">
+                <input type="url" class="form-control" id="urlyoutube" name="urlyoutube" placeholder="https://www.youtube.com/watch?v=G2V6WCOmuJI" />
+                <input type="hidden" id="idyoutube" name="idyoutube" />
               </div>
             <div class="form-group">
+
                 <button type="submit" class="btn btn-primary" disabled="disabled" id="enviaryoutube">Enviar</button>
             </div>
             </form>
@@ -171,6 +172,8 @@
                     titleyoutube = $('input[id=titleyoutube]').val();
                     if (titleyoutube.length > 5) {
                         enable_title = true;
+                    }else{
+                        enable_title = false;
                     }
                     checkEnableSend();
                 }
@@ -192,6 +195,7 @@
                         youtubehtml = "";
                         $('#youtubeiframe').html(youtubehtml);
                         youtubeid_loaded = false;
+                        enable_youtube = false;
                     }
                     checkEnableSend();
                 }
